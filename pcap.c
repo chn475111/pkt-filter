@@ -111,12 +111,13 @@ static void pcap_cb(unsigned char *user, const struct pcap_pkthdr *hdr, const un
     {
         struct icmphdr *icmp_hdr = (struct icmphdr*)(data + eth_hdrlen + ip_hdrlen);
         uint8_t icmp_hdrlen = sizeof(struct icmphdr);               //ICMP包头长度
+        uint16_t icmp_bdylen = ip_totlen - ip_hdrlen - icmp_hdrlen; //ICMP包体长度
 
         fprintf(stdout, "type: %hhu ", icmp_hdr->type);
         fprintf(stdout, "code: %hhu ", icmp_hdr->code);
         fprintf(stdout, "checksum: %hu\n", ntohs(icmp_hdr->checksum));
 
-        dump_packet_fp(stdout, (unsigned char*)(data + eth_hdrlen + ip_hdrlen), icmp_hdrlen);
+        dump_packet_fp(stdout, (unsigned char*)(data + eth_hdrlen + ip_hdrlen + icmp_hdrlen), icmp_bdylen);
     }
     else if(ip_hdr->protocol == IPPROTO_TCP)
     {
