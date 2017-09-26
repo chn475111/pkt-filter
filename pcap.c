@@ -1,5 +1,5 @@
 ﻿/**
- * @author lijk@.infosec.com.cn
+ * @author lijk@infosec.com.cn
  * @version 0.0.1
  * @date 2016-6-1 11:50:10
  */
